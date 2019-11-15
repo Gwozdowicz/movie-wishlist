@@ -1,0 +1,32 @@
+
+<div class="row spacerRow">
+
+</div>
+
+<div class="row contentRow">
+
+<div class="col-3 col-with-border" >
+    <h3 class="topMoviesHeader">Most popular</h3>
+
+    <mat-list class="latestMovieList">
+        <mat-list-item *ngFor="let movie of latestMoviesList">
+            <movie-card class="movie-card-top-picks" [movie]="movie"></movie-card>
+        </mat-list-item>
+    </mat-list>
+
+</div>
+<div class="col-9 col-with-border">
+        <h3 class="topMoviesHeader">Watchlist</h3>
+        <div class="wishList">
+        <mat-grid-list cols="3" rowHeight="320px" >
+            
+                <mat-grid-tile *ngFor="let movie of wishListMovieList">
+                        
+                    <movie-card class="movie-card-wishlist" [movie]="movie"></movie-card>
+                       
+                </mat-grid-tile>
+             
+            </mat-grid-list>
+        </div>
+</div>
+</div>

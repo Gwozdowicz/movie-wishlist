@@ -1,0 +1,26 @@
+﻿<div class="container login-container">
+    <div class="row" >
+      <div class="col-md-3"></div>
+      <div class="col-md-6 login-form-2 text-center pl-0 pr-0 pb-4">
+        
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="pl-5 pr-5 pt-3">
+          <div class="form-group">
+            <input style="margin-top: 25px;" type="text" id="login" name="login" ngModel class="form-control"
+              placeholder="Login" value="" required
+              autofocus />
+          </div>
+          <div class="form-group pt-2">
+            <input type="password" id="password" name="password" ngModel class="form-control"
+              placeholder="Password" value="" required />
+          </div>
+   
+          <div class="form-group pt-4">
+            <button mat-button class = 'loginButton'>Log in</button>
+          </div>
+          <div class="form-group">
+          </div>
+          <div *ngIf="invalidLogin" class="alert alert-danger">Login Error</div>
+        </form>
+      </div>
+    </div>
+  </div>

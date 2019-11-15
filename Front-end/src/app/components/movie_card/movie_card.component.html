@@ -1,0 +1,49 @@
+<div class="thumbnail" style="margin-bottom: 10px; width: 100%; height: 100%;">
+    <div class="container">
+        <div class="row grayRow">
+            <div class="col-12">
+                <div class="image-container">
+
+
+                    <img class="image" height="200" src="https://image.tmdb.org/t/p/w300/{{movie.poster_path}}"
+                        *ngIf="movie.poster_path">
+                    <img height="200" src="assets/img/abstract-image.jpg" *ngIf="!movie.poster_path">
+                </div>
+            </div>
+
+
+        </div>
+        
+
+            <div class="row grayRow">
+                <div class="col-12"><h4 style="text-align: center; " class="text-ellipsis">
+                    <a style="font-size: 15px; color: honeydew;" routerLink="/movies/{{movie.id}}"
+                        title="{{movie.title}}">{{movie.title}}</a>
+                </h4></div>
+                
+            </div>
+
+            <div class="row grayRow">
+                <div class="col-12"><p style="text-align: center; font-size: 8px; color: honeydew;"><strong>Release Date:
+                    </strong>{{movie.release_date}}</p></div>
+                
+            </div>
+
+            <div class="row grayRow">
+                <div class="col-12"><p style="text-align: center; justify-items: space-around; ">
+                    <a style="font-size: 10px; color: honeydew;" routerLink="/movie/{{movie.id}}">View details
+                        &raquo;</a>
+                </p></div>
+                
+            </div>
+            <div class="row grayRow">
+                    <div class="col-12"><p style="text-align: center; justify-items: space-around; ">
+                        <mat-icon class="addToWishlistIcon">mood</mat-icon>
+                        </div>
+                    
+                </div>
+
+
+        </div>
+   
+</div>
