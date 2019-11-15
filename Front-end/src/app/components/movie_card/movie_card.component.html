@@ -38,8 +38,9 @@
             </div>
             <div class="row grayRow">
                     <div class="col-12"><p style="text-align: center; justify-items: space-around; ">
-                        <mat-icon class="addToWishlistIcon">mood</mat-icon>
-                        </div>
+                        <!-- <mat-icon class="addToWishlistIcon">mood</mat-icon> -->
+                        <movie-heart (buttonClicked)='heartClickedHandler()' [movie] = movie ></movie-heart>    
+                    </div>
                     
                 </div>
 

@@ -4,7 +4,8 @@ import { Jsonp, URLSearchParams } from '@angular/http';
 import { ROOT_URL } from 'src/app/api.config';
 import { catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
-import {WishlistItem} from "../models/wishlist_item"
+import {WishlistItem} from "../models/wishlist_item";
+import {Movie} from "../models/movie";
 @Injectable({
   providedIn: 'root'
 })
@@ -18,17 +19,7 @@ export class MovieGetter {
   ngOnInit(): void {
   }
  
-  getWishlist():Observable<WishlistItem[]> {
-    var httpOptions = {
-      headers: new HttpHeaders({
-        "Authorization": "Bearer " + this.token,
-        'Content-Type': 'application/json'
-      }),
-      params: new HttpParams ().set('userId', localStorage.getItem('userId'))
-    }
-    return this.http.get<WishlistItem[]>(this.apiURL + 'wishlist/getwishlist', httpOptions)
-
-  }
+ 
   getLatest() {
     var httpOptions = {
       headers: new HttpHeaders({
@@ -36,7 +27,7 @@ export class MovieGetter {
         'Content-Type': 'application/json',
       })
     }
-    return this.http.get(this.apiURL + 'movies/latest', httpOptions)
+    return this.http.get<Movie[]>(this.apiURL + 'movies/latest', httpOptions)
 
   }
   
@@ -47,7 +38,7 @@ export class MovieGetter {
         'Content-Type': 'application/json',
       })
     }
-    return this.http.get(this.apiURL + 'movies/popular', httpOptions)
+    return this.http.get<Movie[]>(this.apiURL + 'movies/popular', httpOptions)
   }
   getById(id) {
     var httpOptions = {
@@ -56,7 +47,7 @@ export class MovieGetter {
         'Content-Type': 'application/json',
       })
     }
-    return this.http.get(this.apiURL + `movies/${id}`, httpOptions)
+    return this.http.get<Movie>(this.apiURL + `movies/${id}`, httpOptions)
   }
   // getInTheaters() {
   //   var search = new URLSearchParams();

@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 
 // route used to receive curent user's wishlist
 app.get('/getwishlist', wishlistHandler.getWishlist);
-
-
+app.get('/checkWishListForItem', wishlistHandler.checkIfItemIsInWishlist);
+app.put('/addItemToWishlist', wishlistHandler.addItemToWishlist)
 
 module.exports = app;

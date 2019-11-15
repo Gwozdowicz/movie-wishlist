@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LogoutService } from '../../services/logout.service';
 import { MovieGetter } from '../../services/movie.getter.service';
-
-
+import {WatchlistHandler}  from '../../services/watchlist.handler.service'
+import {Movie} from "../../models/movie"
 @Component({
   selector: 'app-dashboard-page',
   templateUrl: './dashboard.component.html',
@@ -12,12 +12,13 @@ import { MovieGetter } from '../../services/movie.getter.service';
 })
 export class DashboardComponent implements OnInit {
 
-  private latestMoviesList;
-  private wishListMovieList;
+  private latestMoviesList: Movie[] ;
+  private wishListMovieList: Movie[];
   constructor(
     private router: Router,
     private logoutSevrice: LogoutService,
-    private movieGetter: MovieGetter
+    private movieGetter: MovieGetter,
+    private watchlistHandler: WatchlistHandler
   ) {
   }
 
@@ -46,7 +47,7 @@ export class DashboardComponent implements OnInit {
 
   getWishList() {
     this.wishListMovieList = [];
-    this.movieGetter.getWishlist()
+    this.watchlistHandler.getWishlist()
       .subscribe(response => {
         response.forEach(el => this.movieGetter.getById((el.movie_id))
           .subscribe(movie => {
@@ -58,6 +59,11 @@ export class DashboardComponent implements OnInit {
 
       })
   }
+
+  refreshWishlist(){
+    this.getWishList()
+  }
+
   logout() {
     this.logoutSevrice.logout()
   }

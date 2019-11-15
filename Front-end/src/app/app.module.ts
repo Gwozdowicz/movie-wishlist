@@ -15,6 +15,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatIconModule } from "@angular/material/icon";
 import {MovieCardComponent} from "./components/movie_card/movie_card.component";
+import {MovieHeartComponent} from "./components/movie_heart/movie.heart.component"
+import {MatButtonModule} from '@angular/material/button';
+import {WatchlistHandler} from './services/watchlist.handler.service';
 export function tokenGetter() {
   return localStorage.getItem("Token");
 }
@@ -24,6 +27,7 @@ export function tokenGetter() {
     LoginPageComponent,
     NavigationComponent,
     MovieCardComponent,
+    MovieHeartComponent,
     DashboardComponent
   ],
   imports: [
@@ -33,6 +37,7 @@ export function tokenGetter() {
     MatIconModule,
     AppRoutingModule,
     MatListModule,
+    MatButtonModule,
     MaterialModule,
     FormsModule,
     JwtModule.forRoot({
@@ -43,7 +48,7 @@ export function tokenGetter() {
       }
     }),
   ],
-  providers: [LoginService,LogoutService, JwtHelperService],
+  providers: [LoginService, WatchlistHandler, LogoutService, JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

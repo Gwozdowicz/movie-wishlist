@@ -65,4 +65,39 @@ module.exports.getUsersWishlist = function (userId) {
 
 }
 
+module.exports.checkIfMovieInWishlist = function (userId, movieId) {
+    return new Promise(function (resolve, reject) {
+        try {
+            console.log(userId , movieId)
+            databaseConnection.query(`SELECT * FROM wish_list AS a WHERE user_id = ${userId} AND movie_id = ${movieId}; `
+                , function (err, result) {
+                    if (err) {
+                        reject()
+                    } else {
+                        if (result[0]) { resolve(true); } else { resolve(false); }
+                    }
+                });
+        } catch (e) {
+            reject();
+        }
+    })
+}
+module.exports.addItemToWishlist = function (userId, movieId) {
+    return new Promise(function (resolve, reject) {
+        try {
+            databaseConnection.query(`INSERT INTO wish_list (id, user_id, movie_id) VALUES (NULL, ${userId}, ${movieId})`
+
+            , function (err, result) {
+                console.log(result)
+                    if (err) {
+                        reject()
+                    } else {
+                        if (result[0]) { resolve(true); } else { resolve(false); }
+                    }
+                });
+        } catch (e) {
+            reject();
+        }
+    })
+}
 

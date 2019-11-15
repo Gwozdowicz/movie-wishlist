@@ -10,7 +10,7 @@
 
     <mat-list class="latestMovieList">
         <mat-list-item *ngFor="let movie of latestMoviesList">
-            <movie-card class="movie-card-top-picks" [movie]="movie"></movie-card>
+            <movie-card (heartClicked)='refreshWishlist()' class="movie-card-top-picks" [movie]="movie"></movie-card>
         </mat-list-item>
     </mat-list>
 

@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-
+import { Component, Input, EventEmitter, Output } from '@angular/core';
+import {Movie} from "../../models/movie"
 @Component({
   selector: 'movie-card',
   templateUrl: './movie_card.component.html',
@@ -8,6 +8,12 @@ import { Component, Input } from '@angular/core';
 export class MovieCardComponent {
 
   @Input()
-  movie: Object;
+  movie: Movie;
 
+  @Output()
+  heartClicked = new EventEmitter();
+
+   heartClickedHandler(){
+    this.heartClicked.emit();
+   }
 }
