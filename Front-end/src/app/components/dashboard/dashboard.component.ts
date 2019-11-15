@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 //import { LoginService } from 'src/app/shared/services/login.service';
 import { Router } from '@angular/router';
 import { LogoutService } from '../../services/logout.service';
@@ -11,9 +11,16 @@ import {Movie} from "../../models/movie"
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  private latestMoviesList: Movie[] ;
-  private wishListMovieList: Movie[];
+  @HostListener('scroll', ['$event'])
+  onScroll(event: any) {
+      // visible height + pixel scrolled >= total height 
+      if (event.target.offsetHeight + event.target.scrollTop >= event.target.scrollHeight) {
+        this.getPopularMovies(this.currentPopularListPage)
+      }
+  }
+  private latestMoviesList: Movie[] = [] ;
+  private wishListMovieList: Movie[] = [];
+  private currentPopularListPage = 1;
   constructor(
     private router: Router,
     private logoutSevrice: LogoutService,
@@ -24,20 +31,24 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getWishList()
-    this.getLatestMovies();
+    this.getInitialPopularMovies();
   }
   getMovies() {
     // Obsolete
-    console.log(localStorage.getItem('userId'))
+    //console.log(localStorage.getItem('userId'))
   }
   getMoviePosterPath(imagePath) {
     return 'https://image.tmdb.org/t/p/w500' + imagePath
   }
 
-  getPopularMovies() {
+  getPopularMovies(page) {
+    this.currentPopularListPage += 1;
+    this.movieGetter.getPopular(page).subscribe(response => {this.latestMoviesList = this.latestMoviesList.concat(response['results'])  });
 
-    this.movieGetter.getPopular().subscribe(response => { this.latestMoviesList = response['results'] });
-
+  }
+  getInitialPopularMovies() {
+    this.currentPopularListPage += 1;
+    this.movieGetter.getPopular(1).subscribe(response => { this.latestMoviesList = response['results']  });
   }
   getLatestMovies() {
 

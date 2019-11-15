@@ -18,11 +18,16 @@ exports.findLatest = (req, res, next) => {
   });
 
 };
-
 exports.findPopular= (req, res, next) => {
-  unirest.get('https://api.themoviedb.org/3/discover/movie')
+  let page = req.query.page
+  unirest.get('https://api.themoviedb.org/3/discover/movie?page=1')
   .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
-  .query({ "api_key": apiKey})
+  .query({ "api_key": apiKey,
+  "language":"en-US",
+  "sort_by":"popularity.desc",
+  "include_adult":false,
+  "page":page
+})
   .end(function (response) {
     if (res.error) throw new Error(res.error);
     res.status(200).json(response.body)

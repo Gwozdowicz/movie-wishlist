@@ -31,12 +31,14 @@ export class MovieGetter {
 
   }
   
-  getPopular() {
+  getPopular(page) {
     var httpOptions = {
       headers: new HttpHeaders({
         "Authorization": "Bearer " + this.token,
         'Content-Type': 'application/json',
-      })
+      }),
+      params: new HttpParams()
+          .append('page', page)
     }
     return this.http.get<Movie[]>(this.apiURL + 'movies/popular', httpOptions)
   }
